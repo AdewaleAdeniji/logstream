@@ -18,7 +18,7 @@ import services from '../services';
 
 const JoinStream = () => {
   const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
-  const [streamCode, setStreamCode] = useState('168532596199350113');
+  const [streamCode, setStreamCode] = useState('');
   const [loading, setLoading] = useState(false);
   const toast = useToast();
 
@@ -64,6 +64,8 @@ const JoinStream = () => {
               value={streamCode}
               onChange={e => setStreamCode(e.target.value)}
             />
+            <br/>
+            Public Stream Code: ST-PUBLIC
           </ModalBody>
 
           <ModalFooter>
