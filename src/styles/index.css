@@ -1,0 +1,29 @@
+.s-chat {
+    margin-left: 260px;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    padding-bottom: 400px;
+}
+.v-none {
+    display: none;
+}
+body {
+    background: rgb(68, 70, 84) !important;
+}
+@media(max-width:600px) {
+    .sidebar {
+        display: none;
+    }
+    .s-chat {
+        margin-left: 0px;
+        padding-bottom: 200px;
+    }
+    .v-none {
+        display: block;
+        visibility: hidden;
+    }
+}
