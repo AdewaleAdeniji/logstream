@@ -2,15 +2,18 @@ import React from 'react';
 import { Box, VStack, Text } from '@chakra-ui/react';
 import { CopyIcon } from '@chakra-ui/icons';
 import useMobile from '../hooks/useMobile';
-import { formatDate } from '../hooks/utils';
+import { copyToClipboard, formatDate } from '../hooks/utils';
 
 const ChatUI = ({ messages }) => {
   const mobile = useMobile();
-
+  const copyText = index => {
+    const message = messages[index];
+    return copyToClipboard(message.logText);
+  };
   const width = mobile ? '95%' : '70%';
   return (
     <>
-      {messages.map(message => {
+      {messages.map((message, index) => {
         return (
           <Box
             key={message.id ? message.id : message.date}
@@ -22,7 +25,7 @@ const ChatUI = ({ messages }) => {
           >
             <VStack spacing={2} align="flex-start">
               <Text fontSize="s" w="100%" textAlign={'right'}>
-                <CopyIcon cursor={'pointer'} />{' '}
+                <CopyIcon cursor={'pointer'} onClick={() => copyText(index)} />{' '}
               </Text>
               <Text fontWeight="bold">{message.user}</Text>
               <Text>{message.logText}</Text>

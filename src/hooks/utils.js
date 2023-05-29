@@ -19,8 +19,9 @@ export const getDeviceName = () => {
     { name: 'IE', regex: /MSIE|Trident/i },
   ];
 
-  
-  const matchedBrowser = browsers.find((browser) => browser.regex.test(userAgent));
+  const matchedBrowser = browsers.find(browser =>
+    browser.regex.test(userAgent)
+  );
   const matchedDevice = devices.find(device => device.regex.test(userAgent));
 
   let device = matchedDevice ? matchedDevice.name : 'Unknown Device';
@@ -29,8 +30,48 @@ export const getDeviceName = () => {
   return `${device}-${browser}`;
 };
 
+export function copyToClipboard(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    // Use the modern clipboard API if available
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        console.log('Text copied to clipboard:', text);
+        // You can show a success message or perform any other action here
+      })
+      .catch((error) => {
+        console.error('Failed to copy text to clipboard:', error);
+        // You can show an error message or handle the error here
+      });
+  } else {
+    // Fallback for mobile devices or browsers that do not support the clipboard API
+    const textField = document.createElement('textarea');
+    textField.value = text;
+    textField.style.position = 'fixed';
+    textField.style.opacity = 0;
+    document.body.appendChild(textField);
+    textField.focus();
+    textField.select();
+  
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        console.log('Text copied to clipboard:', text);
+        // You can show a success message or perform any other action here
+      } else {
+        console.error('Failed to copy text to clipboard.');
+        // You can show an error message or handle the error here
+      }
+    } catch (error) {
+      console.error('Failed to copy text to clipboard:', error);
+      // You can show an error message or handle the error here
+    }
+  
+    document.body.removeChild(textField);
+  }
+}
 
-export const formatDate = (date) => {
+
+export const formatDate = date => {
   return moment(date).format('DD-MM-YYYY h:mm A');
 };
 export const generateID = () => {

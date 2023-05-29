@@ -7,6 +7,10 @@ services.getStreams = () => {
   const t = localStorage.getItem('streamers') || '';
   return t.split(',');
 };
+services.hasStreams =  () => {
+  const t =  services.getStreams();
+  return t.length !== 0 ? t[0] : false;
+}
 services.saveStream = id => {
   var streams = services.getStreams();
   if (streams.indexOf(id) > -1) return false;

@@ -2,7 +2,7 @@ import { Box, Heading, Text, Button, Flex } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import APIS from '../api';
 import { useToast } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import services from '../services';
 
 const LandingPage = () => {
@@ -35,6 +35,13 @@ const LandingPage = () => {
       });
     }
   };
+  useEffect(()=>{
+    const hasStreams = services.hasStreams();
+    if (hasStreams) {
+      return navigate(`/stream/${hasStreams}`);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
   return (
     <Box minHeight="100vh" p={4}>
       <Box maxWidth="600px" mx="auto" textAlign="center">

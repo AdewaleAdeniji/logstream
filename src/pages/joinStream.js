@@ -31,7 +31,7 @@ const JoinStream = () => {
     if (res) {
       await services.saveStream(streamCode);
       toast({
-        title: 'Stream Sessioner joined.',
+        title: 'Stream Session joined.',
         status: 'success',
         duration: 9000,
         isClosable: true,
